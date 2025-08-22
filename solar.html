@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarCam Solutions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        /* Notice Bar */
+        .warning-bar {
+            text-align: center;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-bottom: 2px solid #141313;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .header img {
+            width: 170px;
+            height: auto;
+        }
+
+        /* Icons Section */
+        .icons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .icons img {
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+        }
+
+        .icons img:hover {
+            filter: brightness(0.8);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: #ffffff;
+            padding: 10px 0;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #000000;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #348265;
+        }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            width: 250px;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content h4 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .dropdown-content a {
+            display: block;
+            text-decoration: none;
+            color: #000000;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .dropdown-content a:hover {
+            color: #348265;
+        }
+
+        /* Banner Section */
+        .banner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .banners-container {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .banners {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .banner {
+            background-color: #0b3d91;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 30px;
+            min-width: 100%;
+            margin: 0;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Arrows for banner sliding */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 10;
+            font-size: 2rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
+
+        /* Product Section */
+        .products {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            text-align: center;
+        }
+
+        .product img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Image Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .slide-images {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: auto;
+        }
+
+        .arrow-left-slide,
+        .arrow-right-slide {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .arrow-left-slide {
+            left: 10px;
+        }
+
+        .arrow-right-slide {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Notice Bar -->
+    <div class="warning-bar">
+        ALERT: Our Solar Cameras operate 24/7 with no external power required.
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+        <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\logo.png" alt="SolarCam Solutions Logo">
+
+        <!-- Icons Section placed on the right -->
+        <div class="icons">
+            <img src="images/images search.png" alt="Search Icon">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\userr.png" alt="User Icon">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\cartt.png" alt="Shopping Cart Icon">
+        </div>
+    </div>
+<!-- Navbar -->
+<div class="navbar">
+    <a href="#">New Arrivals</a>
+    <div class="dropdown">
+        <a href="#">Brands</a>
+        <div class="dropdown-content">
+            <h4>Popular Brands</h4>
+            <a href="#">Reolink</a>
+            <a href="#">Arlo</a>
+            <a href="#">Eufy</a>
+            <a href="#">Ring</a>
+            <a href="#">Blink</a>
+            <a href="#">Hikvision</a>
+            <a href="#">Dahua</a>
+            <a href="#">CP Plus</a>
+            <a href="#">Wyze</a>
+            <a href="#">Ezviz</a>
+            <a href="#">Anker</a>
+            <a href="#">LaView</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a href="#">Camera Kits</a>
+        <div class="dropdown-content">
+            <a href="#">View All Kits</a>
+            <a href="#">4G Solar Camera Kits</a>
+            <a href="#">WiFi Solar Camera Kits</a>
+            <a href="#">PTZ Camera Kits</a>
+            <a href="#">Multi-Camera Bundles</a>
+            <a href="#">Clearance Kits</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a href="#">Solar Cameras</a>
+        <div class="dropdown-content">
+            <h4>By Type</h4>
+            <a href="#">4G Solar Cameras</a>
+            <a href="#">WiFi Solar Cameras</a>
+            <a href="#">PTZ Solar Cameras</a>
+            <a href="#">Fixed Lens Solar Cameras</a>
+            <a href="#">Dual Lens Solar Cameras</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a href="#">Accessories</a>
+        <div class="dropdown-content">
+            <h4>Accessories</h4>
+            <a href="#">Solar Panels</a>
+            <a href="#">Mounting Brackets</a>
+            <a href="#">Extra Batteries</a>
+            <a href="#">Memory Cards</a>
+            <a href="#">Power Cables</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a href="#">Security Systems</a>
+        <div class="dropdown-content">
+            <h4>Systems</h4>
+            <a href="#">4G Security Systems</a>
+            <a href="#">WiFi Security Systems</a>
+            <a href="#">PTZ Security Systems</a>
+            <a href="#">Smart AI Systems</a>
+            <a href="#">Cloud-Connected Systems</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a href="#">Smart Home</a>
+        <div class="dropdown-content">
+            <h4>Smart Devices</h4>
+            <a href="#">Smart Alarms</a>
+            <a href="#">Motion Sensors</a>
+            <a href="#">Door Sensors</a>
+            <a href="#">Smart Doorbells</a>
+            <a href="#">Lighting Integration</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a href="#">Support</a>
+        <div class="dropdown-content">
+            <h4>Help & Services</h4>
+            <a href="#">Installation Guides</a>
+            <a href="#">User Manuals</a>
+            <a href="#">Warranty & Repairs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">FAQs</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Banner Section -->
+    <div class="banner-container" style="margin-bottom: 0;"> <!-- No space between banner and image -->
+        <!-- Left Arrow -->
+        <div class="arrow arrow-left" onclick="prevBanner()">&#60;</div>
+
+        <!-- Banners (They are now in the same container and will slide) -->
+        <div class="banners-container">
+            <div class="banners">
+                <div class="banner">
+                    <div class="banner-text">
+                        25% Off Disposables | Code: CLOSEUE33
+                    </div>
+                </div>
+
+                <div class="banner">
+                    <div class="banner-text">
+                        30% Off Uwell Caliburn G3 Series Kit | Code: UWELLG3
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Arrow -->
+        <div class="arrow arrow-right" onclick="nextBanner()">&#62;</div>
+    </div>
+
+    <!-- Image Slideshow Section -->
+    <div class="slideshow-container">
+        <!-- Left Arrow for Slideshow -->
+        <div class="arrow-left-slide" onclick="prevSlide()">&#60;</div>
+
+        <!-- Slide Images -->
+        <div class="slide-images">
+            <div class="slide">
+                <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\first.jpg" 
+                     alt="Image Description 1" 
+                     style="width: 100%; height: 50;">
+            </div>
+            <div class="slide">
+                <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\third.jpg" 
+                     alt="Image Description 2" 
+                     style="width: 100%; height: 50;">
+            </div>
+            <div class="slide">
+                <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\22222.jpg" 
+                     alt="Image Description 3" 
+                     style="width: 100%; height:50;">
+            </div>
+        </div>
+
+        <!-- Right Arrow for Slideshow -->
+        <div class="arrow-right-slide" onclick="nextSlide()">&#62;</div>
+    </div>
+
+    <script>
+        let currentBanner = 0;
+        const banners = document.querySelector('.banners');
+        const totalBanners = document.querySelectorAll('.banner').length;
+
+        function nextBanner() {
+            if (currentBanner < totalBanners - 1) {
+                currentBanner++;
+            } else {
+                currentBanner = 0;
+            }
+            updateBannerPosition();
+        }
+
+        function prevBanner() {
+            if (currentBanner > 0) {
+                currentBanner--;
+            } else {
+                currentBanner = totalBanners - 1;
+            }
+            updateBannerPosition();
+        }
+
+        function updateBannerPosition() {
+            const offset = -currentBanner * 100;
+            banners.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Slideshow code
+        let currentSlide = 0;
+        const slides = document.querySelector('.slide-images');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+            } else {
+                currentSlide = 0;
+            }
+            updateSlidePosition();
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+            } else {
+                currentSlide = totalSlides - 1;
+            }
+            updateSlidePosition();
+        }
+
+        function updateSlidePosition() {
+            const offset = -currentSlide * 100;
+            slides.style.transform = `translateX(${offset}%)`;
+        }
+    </script>
+           <style>
+            .container {
+                padding: 20px;
+                background-color: #f8f8f8;
+                text-align: center;
+            }
+    
+            .container-header h2 {
+                font-size: 1.5rem;
+                color: #000000;
+                margin-bottom: 10px;
+            }
+    
+            .container-header p {
+                font-size: 0.9rem;
+                color: #555555;
+                margin-bottom: 20px;
+            }
+    
+            .container-content {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+    
+            .card {
+                background-color: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                padding: 15px;
+                width: 250px;
+                text-align: center;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+    
+            .card img {
+                width: 100%;
+                height: auto;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+    
+            .card h3 {
+                font-size: 1rem;
+                color: #000000;
+                margin: 10px 0;
+            }
+    
+            .card p {
+                font-size: 0.9rem;
+                color: #555555;
+            }
+    
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    
+    
+    
+        <!-- Updated Container Section with Buttons -->
+<div class="container">
+    <div class="container-header">
+        <h2>Best Solar Cameras of 2025</h2>
+        <p>Explore high-performance cameras and smart security solutions</p>
+    </div>
+    <div class="container-content">
+        <div class="card">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\kit1.webp" alt="Product 1">
+            <h3>Hot Pick!</h3>
+            <p>Advanced 4K Solar Camera with night vision and motion alerts.</p>
+            <button onclick="window.location.href='#';">Shop Now</button>
+        </div>
+        <div class="card">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\kit 2.webp" alt="Product 2">
+            <h3>New Arrival</h3>
+            <p>Smart Pan-Tilt Solar Camera with AI motion tracking.</p>
+            <button onclick="window.location.href='#';">Shop Now</button>
+        </div>
+        <div class="card">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\kit 3.webp" alt="Product 3">
+            <h3>Compact Series</h3>
+            <p>Portable solar-powered camera for small spaces and travel.</p>
+            <button onclick="window.location.href='#';">Shop Now</button>
+        </div>
+    </div>
+</div>
+
+<!-- Trending Section -->
+<div class="header">
+    <h1>Trending</h1>
+</div>
+<div class="container">
+    <div class="products">
+        <div class="product">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\product 1.webp" alt="Product 1">
+            <h3>SolarCam Pro 360</h3>
+            <p>Rs 129.99</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\pss.webp" alt="Product 2">
+            <h3>SmartVision Solar </h3>
+            <p>Rs 55149.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\product 33.webp" alt="Product 3">
+            <h3>EcoGuard Lite</h3>
+            <p>Rs 4489.99</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\p44.webp" alt="Product 4">
+            <h3>UltraView Solar Pro</h3>
+            <p>Rs 66179.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\pro5.webp" alt="Product 5">
+            <h3>SolarCam Mini Wireless</h3>
+            <p>RS 5569.99</p>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Best Sellers Section -->
+    <div class="best-sellers">
+        <h2>Best Sellers</h2>
+        <div class="products">
+            <div class="product">
+                <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\1.webp" alt="Best Seller 1">
+                <h3>SolarCam Elite 4K Kit</h3>
+                <p>Rs 9199.99</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\2.webp" alt="Best Seller 2">
+                <h3>SkyGuard Solar Security System</h3>
+                <p>Rs 99229.00</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\3.webp" alt="Best Seller 3">
+                <h3>EcoView Dual Solar Camera</h3>
+                <p>Rs 77159.99</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="C:\Users\User pc\OneDrive\Desktop\solorcam\images\4.webp" alt="Best Seller 4">
+                <h3>ProShield Solar Wireless</h3>
+                <p>Rs 66139.00</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Section -->
+<div style="text-align: center; margin: 30px 0;">
+    <button style="padding: 10px 25px; border: 1px solid #000; background: transparent; cursor: pointer; font-size: 14px; font-weight: bold; letter-spacing: 1px;">LOAD MORE</button>
+</div>
+
+<!-- Newsletter Section -->
+<div style="background-color: #000; color: #fff; padding: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 200px; margin-right: 20px;">
+        <h2 style="margin: 0; font-size: 18px; text-transform: uppercase;">Newsletter</h2>
+        <p style="margin: 8px 0 0; font-size: 12px; line-height: 1.5;">Stay updated with new product launches, special offers, and smart home security tips.</p>
+    </div>
+    <div style="display: flex; flex: 1; min-width: 200px; align-items: center;">
+        <input type="email" placeholder="Enter your email address" style="padding: 8px; border: none; outline: none; flex: 1; font-size: 12px; margin-right: 8px;">
+        <button style="background: none; border: 1px solid #fff; color: #fff; padding: 8px 12px; cursor: pointer; font-size: 14px;">→</button>
+    </div>
+</div>
+
+<!-- Links Section -->
+<div style="padding: 30px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; color: #333;">
+    <div style="min-width: 150px; margin-bottom: 15px;">
+        <h3 style="font-size: 14px; text-transform: uppercase; font-weight: bold; margin-bottom: 10px;">Follow Us</h3>
+        <div style="display: flex; gap: 12px; font-size: 16px;">
+            <a href="#" style="text-decoration: none; color: #333;">Instagram</a>
+            <a href="#" style="text-decoration: none; color: #333;">Facebook</a>
+            <a href="#" style="text-decoration: none; color: #333;">YouTube</a>
+            <a href="#" style="text-decoration: none; color: #333;">LinkedIn</a>
+            <a href="#" style="text-decoration: none; color: #333;">Pinterest</a>
+        </div>
+    </div>
+    <div style="min-width: 150px; margin-bottom: 15px;">
+        <h3 style="font-size: 14px; text-transform: uppercase; font-weight: bold; margin-bottom: 10px;">Customer Support</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Contact Us</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Track Your Order</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Shipping Information</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Returns & Warranty</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Payment Options</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Help Center</a></li>
+        </ul>
+    </div>
+    <div style="min-width: 150px; margin-bottom: 15px;">
+        <h3 style="font-size: 14px; text-transform: uppercase; font-weight: bold; margin-bottom: 10px;">About</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">About Us</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Blog</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Customer Reviews</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Partnership Program</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Privacy Policy</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Terms & Conditions</a></li>
+        </ul>
+    </div>
+    <div style="min-width: 150px; margin-bottom: 15px;">
+        <h3 style="font-size: 14px; text-transform: uppercase; font-weight: bold; margin-bottom: 10px;">Resources</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">2025 Top Solar Cameras</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Solar Security Installation Guide</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Choosing the Right Camera</a></li>
+            <li style="margin-bottom: 6px;"><a href="#" style="text-decoration: none; color: #333; font-size: 12px;">Clearance & Deals</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Disclaimer Section -->
+<div style="padding: 15px; font-size: 10px; color: #777; line-height: 1.5; border-top: 1px solid #ccc;">
+    <p>Disclaimer: All products are designed for residential and commercial security use. Performance may vary based on location, weather, and installation conditions. Ensure proper installation to maintain product warranty. Solar cameras may require direct sunlight for optimal operation. Please refer to the user manual for detailed instructions. We are not responsible for damages caused by improper installation or misuse.</p>
+</div>
+
+<!-- Copyright Section -->
+<div style="text-align: center; padding: 15px; font-size: 12px; color: #333; background: #f9f9f9;">
+    <p>Copyright © 2025 SolarCam Store. All Rights Reserved.</p>
+</div>
+
+</body>
+</html>
